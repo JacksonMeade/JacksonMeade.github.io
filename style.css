@@ -30,14 +30,15 @@ body {
   color: #f0dfaf;
 
   background-color: #291412;
-  background-image: url('/img/noise.svg');
+  background-image: url('./img/noise.svg');
   background-size: 8rem;
   background-blend-mode: multiply;
 }
 
 .jumbotron {
   font-family: 'Inter Thin', sans-serif;
-  font-size: 3rem;
+  font-size: 1.5rem;
+  padding: 20vh 1rem;
 }
 
 .skills-container {
@@ -52,6 +53,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
 }
+
 
 .skill, .request-searchbar button {
   color: #f0dfaf;
@@ -77,13 +79,8 @@ body {
 }
 
 .skill i {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
-}
-
-.skill small {
   font-size: 1rem;
-  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .skill:hover, .request-searchbar button:hover {
@@ -160,6 +157,10 @@ body {
   transition: opacity 0.1s ease-in-out;
 }
 
+.skill small {
+  display: none;
+}
+
 @media (min-width: 576px) { 
 
 }
@@ -169,11 +170,25 @@ body {
     position: absolute;
     top: 7rem;
     right: 8rem;
+
+    padding: 0;
+    font-size: 3rem;
+  }
+
+  .skill small {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    display: block;
+  }
+
+  .skill i {
+    font-size: 3rem;
   }
   
   .bottom img {
     max-width: calc(100vw * 0.6893);
   }
+
 }
 
 @media (min-width: 992px) { 
