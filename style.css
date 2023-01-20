@@ -25,6 +25,9 @@ src: url('/fonts/Padauk-Bold.ttf');
 }
 
 body {
+  z-index: 0;
+  overflow: hidden;
+
   font-family: 'Inter', sans-serif;
   font-weight: 100;
   color: #f0dfaf;
@@ -33,12 +36,64 @@ body {
   background-image: url('./img/noise.svg');
   background-size: 8rem;
   background-blend-mode: multiply;
+
 }
+
+main {
+  width: 100vw;
+  height: 100vh;
+}
+
+.background {
+  z-index: -1;
+  pointer-events: none;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+div.background {
+  background: rgb(41,20,18);
+  background: -moz-linear-gradient(48deg, rgba(41,20,18,1) 0%, rgba(50,72,84,0.7247899843531162) 78%, rgba(133,84,148,0.5847339619441527) 100%);
+  background: -webkit-linear-gradient(48deg, rgba(41,20,18,1) 0%, rgba(50,72,84,0.7247899843531162) 78%, rgba(133,84,148,0.5847339619441527) 100%);
+  background: linear-gradient(48deg, rgba(41,20,18,1) 0%, rgba(50,72,84,0.7247899843531162) 78%, rgba(133,84,148,0.5847339619441527) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#291412",endColorstr="#855494",GradientType=1); 
+  transition: opacity 0.4s linear;
+
+}
+
+
+
+.player {
+  z-index: -2;
+  pointer-events: none;
+  position: relative;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.player video {
+  min-width: 100vw;
+  min-height: 100vh;
+  position: absolute;
+  width: auto;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  object-fit: cover;
+}
+
 
 .jumbotron {
   font-family: 'Inter Thin', sans-serif;
   font-size: 1.5rem;
-  padding: 20vh 1rem;
+  padding: 14vh 1rem;
+}
+
+.jumbotron h1 {
+  font-size: 4rem;
 }
 
 .skills-container {
@@ -50,7 +105,7 @@ body {
 
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap:nowrap;
   justify-content: center;
 }
 
@@ -62,8 +117,8 @@ body {
   background: rgba(240, 223, 175, 0.1);
 
   padding: 1.5rem 1rem;
-  flex: 1 1 0;
-  margin: 0 0.5rem;
+
+  margin: 0 0.1rem;
 
   border-radius: 1rem;
   transition: background 0.1s ease-in-out;
@@ -76,11 +131,11 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex: 1 1 0;
 }
 
 .skill i {
   font-size: 1rem;
-  margin-bottom: 0.5rem;
 }
 
 .skill:hover, .request-searchbar button:hover {
@@ -124,6 +179,8 @@ body {
   outline: none;
   color: #f0dfaf;
   width: 70%;
+
+  font-size: 1rem;
 }
 
 #attr {
@@ -132,7 +189,7 @@ body {
   bottom: 0.5rem;
   left: 0.5rem;
   writing-mode: sideways-lr;
-  font-size: 0.7rem;
+  font-size: 0.6rem;
 }
 
 .bottom {
@@ -147,33 +204,89 @@ body {
 .bottom img {
   pointer-events: none;
 
-  height: auto;
-  width: 100%;
+  height: 40vh;
+  width: auto;
   position: absolute;
   bottom: 0;
-  left: 0;
-  max-height: 100vh;
+  left: 50%;
+  transform: translate(-55%, 0%);
 
   transition: opacity 0.1s ease-in-out;
+}
+
+.bottom.reverse {
+  right: 0;
+}
+
+.bottom.reverse img {
+  left: unset;
+  right: 50%;
 }
 
 .skill small {
   display: none;
 }
 
+.request-searchbar > input {
+  flex: 1 1 0;
+}
+
+.request-searchbar button > :first-child {
+  display: none;
+}
+.request-searchbar button > :last-child {
+  display: block;
+}
+
 @media (min-width: 576px) { 
 
+  #attr {
+    font-size: 0.7rem;
+  }
+
+  .bottom img {
+    height: auto;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    transform: translate(0%, 0%);
+    left: 0;
+    max-height: 100vh;
+  }
+
+  .bottom.reverse img {
+    left: unset;
+    right: 0;
+  }
+
+  .request-searchbar input {
+    flex: unset;
+    font-size: 1.5rem;
+  }
+
+  .request-searchbar button {
+      flex: 1 1 0;
+  }
+
+  .request-searchbar button > :first-child {
+    display: block;
+  }
+  .request-searchbar button > :last-child {
+    display: none;
+  }
 }
 
 @media (min-width: 768px) {
   .jumbotron {
     position: absolute;
-    top: 7rem;
+    top: 3rem;
     right: 8rem;
 
     padding: 0;
     font-size: 3rem;
   }
+
+
 
   .skill small {
     font-size: 1rem;
@@ -183,6 +296,11 @@ body {
 
   .skill i {
     font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .skill {
+    margin: 0 0.5rem;
   }
   
   .bottom img {
@@ -203,6 +321,10 @@ body {
   .bottom {
     max-width: 1100px;
   }
+
+  .jumbotron {
+    top: 20vh;
+  }
 }
 
 @media (max-width: 575.98px) { 
@@ -221,367 +343,15 @@ body {
 
 }
 
-
-/*
-  .text-flicker-in-glow
-  {
-    animation: text-flicker-in-glow 5s linear infinite 6s alternate-reverse;
-  }
-  */
-  input:focus {
-    outline: none;
-  }
-
-
-.fade-out-fwd {
-	animation: fade-out-fwd 4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+.transition-slide {
+  transform: translateX(0);
+  transition: transform 1s ease-in-out;
 }
 
-.fade-out-fwd--from-full {
-  animation: fade-out-fwd--from-full 4s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s both;
+html.is-animating .transition-slide {
+  transform: translateX(100%);
 }
 
-.fade-in-fwd {
-    animation: fade-in-fwd 4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+html.is-leaving .transition-slide {
+  transform: translateX(-100%);
 }
-
-.handheld {
-	animation: handheld 40s ease-in-out infinite alternate-reverse;
-}
-
-.blur-in-zoom.can-play :not(video) {
-	animation: blur-in-zoom 4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-}
-
-p.text-focus-in.can-play {
-	animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) 6.2s both;
-}
-
-input.text-focus-in.can-play {
-	animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) 6.4s both;
-}
-
-.breakout.text-focus-in.can-play {
-  animation: text-focus-in 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) 6.7s both;
-}
-
-video.fade-in-fwd.can-play {
-  animation: fade-in-fwd--full 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) 1s both;
-}
-
-.text-flicker-in-glow #first {
-	animation: text-flicker-in-glow 4s linear 0.2s both;
-}
-.text-flicker-in-glow #second {
-	animation: text-flicker-in-glow 4s linear 0.2s both;
-}
-.text-flicker-in-glow #third {
-	animation: text-flicker-in-glow 3s linear 0.1s both;
-}
-.text-flicker-in-glow #fourth {
-	animation: text-flicker-in-glow 4s linear both;
-}
-.text-flicker-in-glow #fifth {
-	animation: text-flicker-in-glow 3.5s linear both;
-}
-.text-flicker-in-glow #sixth {
-	animation: text-flicker-in-glow 1.5s linear 0.5s both;
-}
-.text-flicker-in-glow #seventh {
-	animation: text-flicker-in-glow 4.5s linear both;
-}
-.text-flicker-in-glow #eighth {
-	animation: text-flicker-in-glow 3.4s linear both;
-}
-
-/* ----------------------------------------------
- * Generated by Animista on 2021-12-28 2:31:46
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
-
-/**
- * ----------------------------------------
- * animation text-flicker-in-glow
- * ----------------------------------------
- */
- @keyframes text-flicker-in-glow {
-    0% {
-      opacity: 0;
-    }
-    10% {
-      opacity: 0;
-      text-shadow: none;
-    }
-    10.1% {
-      opacity: 1;
-      text-shadow: none;
-    }
-    10.2% {
-      opacity: 0;
-      text-shadow: none;
-    }
-    20% {
-      opacity: 0;
-      text-shadow: none;
-    }
-    20.1% {
-      opacity: 1;
-      text-shadow: 0 0 30px rgba(255, 255, 255, 0.25);
-    }
-    20.6% {
-      opacity: 0;
-      text-shadow: none;
-    }
-    30% {
-      opacity: 0;
-      text-shadow: none;
-    }
-    30.1% {
-      opacity: 1;
-      text-shadow: 0 0 30px rgba(255, 255, 255, 0.45), 0 0 60px rgba(255, 255, 255, 0.25);
-    }
-    30.5% {
-      opacity: 1;
-      text-shadow: 0 0 30px rgba(255, 255, 255, 0.45), 0 0 60px rgba(255, 255, 255, 0.25);
-    }
-    30.6% {
-      opacity: 0;
-      text-shadow: none;
-    }
-    45% {
-      opacity: 0;
-      text-shadow: none;
-    }
-    45.1% {
-      opacity: 1;
-      text-shadow: 0 0 30px rgba(255, 255, 255, 0.45), 0 0 60px rgba(255, 255, 255, 0.25);
-    }
-    50% {
-      opacity: 1;
-      text-shadow: 0 0 30px rgba(255, 255, 255, 0.45), 0 0 60px rgba(255, 255, 255, 0.25);
-    }
-    55% {
-      opacity: 1;
-      text-shadow: 0 0 30px rgba(255, 255, 255, 0.45), 0 0 60px rgba(255, 255, 255, 0.25);
-    }
-    55.1% {
-      opacity: 0;
-      text-shadow: none;
-    }
-    57% {
-      opacity: 0;
-      text-shadow: none;
-    }
-    57.1% {
-      opacity: 1;
-      text-shadow: 0 0 30px rgba(255, 255, 255, 0.55), 0 0 60px rgba(255, 255, 255, 0.35);
-    }
-    60% {
-      opacity: 1;
-      text-shadow: 0 0 30px rgba(255, 255, 255, 0.55), 0 0 60px rgba(255, 255, 255, 0.35);
-    }
-    60.1% {
-      opacity: 0;
-      text-shadow: none;
-    }
-    65% {
-      opacity: 0;
-      text-shadow: none;
-    }
-    65.1% {
-      opacity: 1;
-      text-shadow: 0 0 30px rgba(255, 255, 255, 0.55), 0 0 60px rgba(255, 255, 255, 0.35), 0 0 100px rgba(255, 255, 255, 0.1);
-    }
-    75% {
-      opacity: 1;
-      text-shadow: 0 0 30px rgba(255, 255, 255, 0.55), 0 0 60px rgba(255, 255, 255, 0.35), 0 0 100px rgba(255, 255, 255, 0.1);
-    }
-    75.1% {
-      opacity: 0;
-      text-shadow: none;
-    }
-    77% {
-      opacity: 0;
-      text-shadow: none;
-    }
-    77.1% {
-      opacity: 1;
-      text-shadow: 0 0 30px rgba(255, 255, 255, 0.55), 0 0 60px rgba(255, 255, 255, 0.4), 0 0 110px rgba(255, 255, 255, 0.2), 0 0 100px rgba(255, 255, 255, 0.1);
-    }
-    85% {
-      opacity: 1;
-      text-shadow: 0 0 30px rgba(255, 255, 255, 0.55), 0 0 60px rgba(255, 255, 255, 0.4), 0 0 110px rgba(255, 255, 255, 0.2), 0 0 100px rgba(255, 255, 255, 0.1);
-    }
-    85.1% {
-      opacity: 0;
-      text-shadow: none;
-    }
-    86% {
-      opacity: 0;
-      text-shadow: none;
-    }
-    86.1% {
-      opacity: 1;
-      text-shadow: 0 0 30px rgba(255, 255, 255, 0.6), 0 0 60px rgba(255, 255, 255, 0.45), 0 0 110px rgba(255, 255, 255, 0.25), 0 0 100px rgba(255, 255, 255, 0.1);
-    }
-    100% {
-      opacity: 1;
-      text-shadow: 0 0 30px rgba(255, 255, 255, 0.6), 0 0 60px rgba(255, 255, 255, 0.45), 0 0 110px rgba(255, 255, 255, 0.25), 0 0 100px rgba(255, 255, 255, 0.1);
-    }
-  }
-  
-/* ----------------------------------------------
- * Generated by Animista on 2021-12-28 2:56:46
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
-
-/**
- * ----------------------------------------
- * animation blur-in-zoom
- * ----------------------------------------
- */
- @keyframes blur-in-zoom {
-    0% {
-        letter-spacing: 1em;
-        transform: translateZ(300px) rotate(-128deg);
-        filter: blur(12px) opacity(0%);
-      }
-    100% {
-      transform: translateZ(0) rotate(0deg);
-      filter: blur(0.01);
-    }
-  }
-  
-
-  /* ----------------------------------------------
- * Generated by Animista on 2021-12-28 3:1:27
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
-
-/**
- * ----------------------------------------
- * animation vibrate-2
- * ----------------------------------------
- */
-@keyframes handheld {
-    0% {
-      -ms-transform: translate(0%, 0%);
-      transform: translate(0%, 0%);
-    }
-    20% {
-      -ms-transform: translate(-1%, 0%);
-      transform: translate(1%, 0%);
-    }
-    40% {
-      -ms-transform: translate(-1%, -1%);
-      transform: translate(-1%, -1%);
-    }
-    60% {
-      -ms-transform: translate(1%, 0%);
-      transform: translate(1%, 0%);
-    }
-    80% {
-      -ms-transform: translate(0%, -1%);
-      transform: translate(0%, -1%);
-    }
-    100% {
-      -ms-transform: translate(0%, 0%);
-      transform: translate(0%, 0%);
-    }
-  }
-
-
-  /* ----------------------------------------------
- * Generated by Animista on 2021-12-28 3:19:43
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
-
-/**
- * ----------------------------------------
- * animation fade-out-fwd
- * ----------------------------------------
- */
-@keyframes fade-out-fwd {
-    0% {
-      filter: opacity(60%);
-    }
-    100% {
-        filter: opacity(0%);
-    }
-  }
-
-  @keyframes fade-out-fwd--from-full {
-    0% {
-      filter: opacity(100%);
-    }
-    100% {
-        filter: opacity(0%);
-    }
-  }
-
-  @keyframes fade-in-fwd {
-    0% {
-      filter: opacity(0%);
-    }
-    100% {
-        filter: opacity(8%);
-    }
-  }
-  @keyframes fade-in-fwd--full {
-    0% {
-      filter: opacity(0%);
-    }
-    100% {
-        filter: opacity(100%);
-    }
-  }
-  
-/* ----------------------------------------------
- * Generated by Animista on 2021-12-28 6:51:54
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
-
-/**
- * ----------------------------------------
- * animation text-focus-in
- * ----------------------------------------
- */
- @keyframes text-focus-in {
-  0% {
-    filter: blur(12px);
-    opacity: 0;
-  }
-  100% {
-    filter: blur(0px);
-    opacity: 1;
-  }
-}
-
-
-/*!
- * IE10 viewport hack for Surface/desktop Windows 8 bug
- * Copyright 2014-2019 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- */
- @-ms-viewport {
-  width: device-width;
-}
-@-o-viewport {
-  width: device-width;
-}
-@viewport {
-  width: device-width;
-}
-
-
-/* stylelint-disable property-no-vendor-prefix */
