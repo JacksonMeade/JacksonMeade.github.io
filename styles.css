@@ -156,6 +156,10 @@ body {
   .jumbotron h1 {
     font-size: 4rem;
   }
+
+  .jumbotron h1, h4 {
+    font-weight: lighter;
+  }
   
   .skills-container {
     font-family: 'Inter Thin', sans-serif;
