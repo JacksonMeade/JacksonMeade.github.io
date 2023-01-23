@@ -91,6 +91,10 @@ body {
     width: 100vw;
     height: 100vh;
   }
+
+  .home-image, #attr {
+    z-index: 3;
+  }
   
   .home-image {
     pointer-events: none;
@@ -146,7 +150,7 @@ body {
     z-index: 2;
     font-family: 'Inter Thin', sans-serif;
     font-size: 1.5rem;
-    padding: 14vh 1rem;
+    padding: 4vh 1rem;
   }
   
   .jumbotron h1 {
@@ -252,10 +256,35 @@ body {
     writing-mode: sideways-lr;
     font-size: 0.6rem;
   }
-  
 
+  .request-searchbar > input {
+    flex: 1 1 0;
+  }
+  
+  .request-searchbar button > :first-child {
+    display: none;
+  }
+  .request-searchbar button > :last-child {
+    display: block;
+  }
   
 @media (min-width: 768px) {
+  .request-searchbar input {
+    flex: unset;
+    font-size: 1.5rem;
+  }
+
+  .request-searchbar button {
+      flex: 1 1 0;
+  }
+
+  .request-searchbar button > :first-child {
+    display: block;
+  }
+  .request-searchbar button > :last-child {
+    display: none;
+  }
+
     .jumbotron {
       position: absolute;
       top: 3rem;
